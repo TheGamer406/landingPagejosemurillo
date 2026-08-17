@@ -6,8 +6,13 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://jmurilloch.dev',
 	integrations: [mdx(), sitemap()],
+	vite: {
+		server: {
+			allowedHosts: ['jmurilloch.dev'],
+		},
+	},
 	fonts: [
 		{
 			provider: fontProviders.local(),
