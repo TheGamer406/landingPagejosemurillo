@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import fotoJose from '../../assets/yo.jpg';
+---
+
+<div class=personalCard>
+  <img src={fotoJose.src} alt="fotografia Jose Murillo"/>
+  <div class=name> 
+    <h1>Jose Alejandro Murillo Chevez</h1>
+    <p>Desarollador de Software</p>
+  </div>
+</div>
+
+<style>
+  .personalCard{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  img{
+    height: 100%;
+    z-index: 0;
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-grandient(to bottom, black 60%, transparent 100%);
+  }
+  .name{
+    position: absolute;
+    justify-content: end;
+    text-align: end;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    h1{
+      
+    }
+  }
+</style>
