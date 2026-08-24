@@ -5,9 +5,11 @@ import fotoJose from '../../assets/yo.jpg';
 
 <div class=personalCard>
   <img src={fotoJose.src} alt="fotografia Jose Murillo"/>
-  <div class=name> 
-    <h1>Jose Alejandro Murillo Chevez</h1>
-    <p>Desarollador de Software</p>
+  <div class=presentation>
+    <div>
+      <h1>Jose Alejandro Murillo Chevez</h1>
+      <p>&lt;&gt;Desarollador de software&lt;/&gt;</p>
+    </div>
   </div>
 </div>
 
@@ -24,7 +26,7 @@ import fotoJose from '../../assets/yo.jpg';
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     -webkit-mask-image: linear-grandient(to bottom, black 60%, transparent 100%);
   }
-  .name{
+  .presentation{
     position: absolute;
     justify-content: end;
     text-align: end;
@@ -32,7 +34,19 @@ import fotoJose from '../../assets/yo.jpg';
     bottom: 0px;
     z-index: 1;
     h1{
-      
+      margin: 5px 10px 5px auto;
+      font-size: 50px;
+    }
+    div{
+      margin-left: auto;
+      width: 70%;
+      background-image: radial-gradient(circle at 100% 0%, rgba(30, 58, 138, 0.5) 0%, transparent 70%);
+      border-radius: 10px;
+    }
+    p{
+      margin:0 15px 0 0;
+      font-size: 25px;
+      color:cyan;
     }
   }
 </style>
