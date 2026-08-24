@@ -2,11 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import PC from '../components/landing/yo.astro';
-import MyTittle from '../components/landing/tittle.astro'
+import Landing from "../components/landing/landing.astro"
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-
-
 --- 
 <!doctype html> 
   <html lang="en">
@@ -16,22 +13,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
     <Header />
     <!--landingPage-->
-    <div class="landingZone"> 
-      <PC />
-      <MyTittle />
-    </div>
+    <Landing />
     <main>
       <!--resumeProjects-->
-      Hola
 		</main>
 		<Footer />
 	</body>
 </html>
-
-<style>
-  .landingZone {
-    display: flex;
-    height: 80vh;
-    padding: 1em calc(100vh - 80vh);
-  }
-</style>
