@@ -1,0 +1,40 @@
+---
+---
+
+<div class="bgFx" aria-hidden="true">
+  <div class="bgPattern"></div>
+</div>
+
+<style>
+  .bgFx {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bgPattern {
+    position: absolute;
+    inset: -800px;
+    --sx: 760px;
+    --sy: 380px;
+    background: url('/fancy-pants.jpg') repeat;
+    background-size: var(--sx) var(--sy);
+    opacity: 0.35;
+    will-change: transform;
+    animation: bgDrift 90s linear infinite;
+  }
+  @keyframes bgDrift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(var(--sx), var(--sy), 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bgPattern {
+      animation: none;
+    }
+  }
+</style>
