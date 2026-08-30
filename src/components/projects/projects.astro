@@ -11,10 +11,17 @@ const projects = [
 ---
 
 <div class="projectsHero">
-  <h1>Proyectos</h1>
-  <div class="line" />
-  <p class="comment">Trabajo en curso &middot; se irán agregando proyectos aquí</p>
-  <p class="scrollCue">Desliza para ver <span>&darr;</span></p>
+  <div class="cube" />
+  <div class="cube" />
+  <div class="cube" />
+  <div class="cube" />
+  <div class="heroContent">
+    <h1>Proyectos</h1>
+    <div class="line" />
+    <p class="comment">Trabajo en curso &middot; se irán agregando proyectos aquí</p>
+    <p class="scrollCue">Desliza para ver <span>&darr;</span></p>
+  </div>
+  <div class="heroFade" />
 </div>
 
 <section class="projectsZone">
@@ -39,8 +46,23 @@ const projects = [
   </div>
 </section>
 
+<script>
+  function randomizeCube(cube: HTMLElement) {
+    cube.style.setProperty('--cube-top', `${Math.random() * 90}vh`);
+    cube.style.setProperty('--cube-left', `${Math.random() * 90}vw`);
+  }
+
+  const cubes = document.querySelectorAll<HTMLElement>('.projectsHero .cube');
+  cubes.forEach((cube) => {
+    randomizeCube(cube);
+    cube.addEventListener('animationiteration', () => randomizeCube(cube));
+  });
+</script>
+
 <style>
   .projectsHero {
+    position: relative;
+    overflow: hidden;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -48,10 +70,57 @@ const projects = [
     justify-content: center;
     text-align: center;
     padding: 1em;
+    background-color: var(--color-bg-page);
+  }
+  .heroContent {
+    position: relative;
+    z-index: 1;
+  }
+  .heroFade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, var(--color-bg-page));
+    pointer-events: none;
   }
   .projectsHero h1 {
     color: var(--color-highlight);
     font-size: 55px;
+  }
+  .cube {
+    position: absolute;
+    top: var(--cube-top, 80vh);
+    left: var(--cube-left, 45vw);
+    width: 10px;
+    height: 10px;
+    border: solid 1px var(--color-highlight-deep);
+    transform-origin: top left;
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    animation: cube 6s ease-in forwards infinite;
+  }
+  .cube:nth-child(2n) {
+    border-color: var(--color-highlight);
+  }
+  .cube:nth-child(2) {
+    animation-delay: 1s;
+  }
+  .cube:nth-child(3) {
+    animation-delay: 2s;
+  }
+  .cube:nth-child(4) {
+    animation-delay: 3s;
+  }
+  @keyframes cube {
+    from {
+      transform: scale(0) rotate(0deg) translate(-50%, -50%);
+      opacity: 1;
+    }
+    to {
+      transform: scale(20) rotate(960deg) translate(-50%, -50%);
+      opacity: 0;
+    }
   }
   .line {
     height: 3px;
