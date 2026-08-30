@@ -15,6 +15,8 @@
 	--color-bg-elevated: #161b22;
 	--color-shadow-rgb: 0, 0, 0;
 	--shadow-elevated: 0 2px 6px rgba(var(--color-shadow-rgb), 40%), 0 8px 24px rgba(var(--color-shadow-rgb), 40%);
+	--color-highlight: cyan;
+	--color-highlight-deep: rgba(30, 58, 138, 1);
 }
 
 /* Light theme */
@@ -28,6 +30,8 @@
 	--color-bg-elevated: #eaeef2;
 	--color-shadow-rgb: 96, 115, 159;
 	--shadow-elevated: 0 2px 6px rgba(var(--color-shadow-rgb), 25%), 0 8px 24px rgba(var(--color-shadow-rgb), 25%);
+	--color-highlight: #0891b2;
+	--color-highlight-deep: rgba(30, 58, 138, 1);
 }
 html{
   margin: 0;
