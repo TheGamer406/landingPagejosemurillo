@@ -1,4 +1,5 @@
 ---
+// TODO: mover a una content collection cuando haya mas proyectos reales
 const projects = [
   {
     title: 'Landing Page Portfolio',
@@ -10,20 +11,23 @@ const projects = [
 ];
 ---
 
+<!--hero con cubos animados de fondo-->
 <div class="projectsHero">
-  <div class="cube" />
-  <div class="cube" />
-  <div class="cube" />
-  <div class="cube" />
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
   <div class="heroContent">
     <h1>Proyectos</h1>
     <div class="line" />
     <p class="comment">Trabajo en curso &middot; se irán agregando proyectos aquí</p>
     <p class="scrollCue">Desliza para ver <span>&darr;</span></p>
   </div>
-  <div class="heroFade" />
+  <!--degradado que enlaza el hero con la grilla-->
+  <div class="heroFade"></div>
 </div>
 
+<!--listado de proyectos-->
 <section class="projectsZone">
 
   <div class="projectsGrid">
@@ -38,6 +42,7 @@ const projects = [
       </a>
     ))}
 
+    <!--tarjeta fija que indica que la seccion sigue en desarrollo-->
     <div class="projectCard placeholder">
       <span class="status">Próximamente</span>
       <h3>Más proyectos en camino</h3>
@@ -47,6 +52,7 @@ const projects = [
 </section>
 
 <script>
+  // Sin esto los cubos reaparecerian siempre en las mismas 4 posiciones
   function randomizeCube(cube: HTMLElement) {
     cube.style.setProperty('--cube-top', `${Math.random() * 90}vh`);
     cube.style.setProperty('--cube-left', `${Math.random() * 90}vw`);
@@ -55,6 +61,7 @@ const projects = [
   const cubes = document.querySelectorAll<HTMLElement>('.projectsHero .cube');
   cubes.forEach((cube) => {
     randomizeCube(cube);
+    // Se reubica al cerrar cada vuelta, no en cada frame
     cube.addEventListener('animationiteration', () => randomizeCube(cube));
   });
 </script>
@@ -98,7 +105,7 @@ const projects = [
     border: solid 1px var(--color-highlight-deep);
     transform-origin: top left;
     transform: scale(0) rotate(0deg) translate(-50%, -50%);
-    animation: cube 6s ease-in forwards infinite;
+    animation: cube 6s ease-in infinite;
   }
   .cube:nth-child(2n) {
     border-color: var(--color-highlight);
@@ -166,7 +173,7 @@ const projects = [
     border-radius: 10px;
     padding: 1.5em;
     box-shadow: var(--shadow-elevated);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
   }
   .projectCard:hover {
     transform: translateY(-4px);
