@@ -4,34 +4,42 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+/*
+  Paleta: rampa analoga cyan -> sky -> blue (matiz 187deg -> 199deg -> 217deg).
+  Los grises llevan un tinte azul para que pertenezcan a la misma familia.
+	--color-highlight       cyan, color protagonista (titulos, lineas, acentos)
+	--color-highlight-deep  azul, color de apoyo (degradados, chips, bordes)
+	--color-accent          sky, punto medio, reservado para enlaces
+*/
+
 /* Dark theme (default) */
 :root {
 	color-scheme: dark;
-	--color-accent: #58a6ff;
-	--color-accent-dark: #1f6feb;
-	--color-ink: #e6edf3;
-	--color-ink-muted: #8b949e;
-	--color-bg-page: #0d1117;
-	--color-bg-elevated: #161b22;
+	--color-highlight: #22d3ee;
+	--color-highlight-deep: #3b82f6;
+	--color-accent: #38bdf8;
+	--color-accent-dark: #0ea5e9;
+	--color-ink: #e6f1f8;
+	--color-ink-muted: #8ba3b8;
+	--color-bg-page: #071119;
+	--color-bg-elevated: #0e1d28;
 	--color-shadow-rgb: 0, 0, 0;
 	--shadow-elevated: 0 2px 6px rgba(var(--color-shadow-rgb), 40%), 0 8px 24px rgba(var(--color-shadow-rgb), 40%);
-	--color-highlight: cyan;
-	--color-highlight-deep: rgba(30, 58, 138, 1);
 }
 
 /* Light theme */
 .whiteMode {
 	color-scheme: light;
-	--color-accent: #2337ff;
-	--color-accent-dark: #000d8a;
-	--color-ink: #0d1117;
-	--color-ink-muted: #57606a;
-	--color-bg-page: #ffffff;
-	--color-bg-elevated: #eaeef2;
-	--color-shadow-rgb: 96, 115, 159;
-	--shadow-elevated: 0 2px 6px rgba(var(--color-shadow-rgb), 25%), 0 8px 24px rgba(var(--color-shadow-rgb), 25%);
-	--color-highlight: #0891b2;
-	--color-highlight-deep: rgba(30, 58, 138, 1);
+	--color-highlight: #0e7490;
+	--color-highlight-deep: #1d4ed8;
+	--color-accent: #0369a1;
+	--color-accent-dark: #075985;
+	--color-ink: #0b1a24;
+	--color-ink-muted: #4a6376;
+	--color-bg-page: #f6fafd;
+	--color-bg-elevated: #e4eef5;
+	--color-shadow-rgb: 30, 70, 100;
+	--shadow-elevated: 0 2px 6px rgba(var(--color-shadow-rgb), 18%), 0 8px 24px rgba(var(--color-shadow-rgb), 18%);
 }
 html{
   margin: 0;
