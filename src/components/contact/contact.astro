@@ -9,12 +9,12 @@ const ICONS = {
     'M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z',
 };
 
-// TODO: reemplazar los href '#' con los perfiles reales
+// Un href null se pinta como tarjeta inactiva ("Proximamente") en vez de enlace roto.
 const links = [
   {
     name: 'LinkedIn',
     label: 'Perfil profesional y experiencia',
-    href: '#',
+    href: 'https://www.linkedin.com/in/josemurilloch',
     icon: 'linkedin',
     viewBox: '0 0 448 512',
     accent: '#0a66c2',
@@ -30,14 +30,14 @@ const links = [
   {
     name: 'Fiverr',
     label: 'Contratame como freelance',
-    href: '#',
+    href: 'https://es.fiverr.com/josemurillochev',
     letter: 'fi',
     accent: '#1dbf73',
   },
   {
     name: 'Workana',
     label: 'Proyectos freelance en LATAM',
-    href: '#',
+    href: 'https://www.workana.com/freelancer/394f0425e9e241b6c6902fe71374df89',
     letter: 'W',
     accent: 'var(--color-highlight)',
   },
@@ -59,30 +59,35 @@ const links = [
 <!--perfiles y plataformas-->
 <section class="contactZone">
   <ul class="linkGrid">
-    {links.map((link) => (
-      <li>
-        <a
-          class="linkCard"
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={`--accent: ${link.accent}`}
-        >
-          <span class="badge">
-            {link.icon ? (
-              <svg viewBox={link.viewBox} aria-hidden="true" width="24" height="24">
-                <path fill="currentColor" d={ICONS[link.icon as keyof typeof ICONS]}></path>
-              </svg>
-            ) : (
-              <span class="letter" aria-hidden="true">{link.letter}</span>
-            )}
-          </span>
-          <span class="linkName">{link.name}</span>
-          <span class="linkLabel">{link.label}</span>
-          <span class="arrow" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    ))}
+    {links.map((link) => {
+      const Tag = link.href ? 'a' : 'div';
+      return (
+        <li>
+          <Tag
+            class:list={['linkCard', { inactive: !link.href }]}
+            href={link.href}
+            target={link.href ? '_blank' : undefined}
+            rel={link.href ? 'noopener noreferrer' : undefined}
+            style={`--accent: ${link.accent}`}
+          >
+            <span class="badge">
+              {link.icon ? (
+                <svg viewBox={link.viewBox} aria-hidden="true" width="24" height="24">
+                  <path fill="currentColor" d={ICONS[link.icon as keyof typeof ICONS]}></path>
+                </svg>
+              ) : (
+                <span class="letter" aria-hidden="true">{link.letter}</span>
+              )}
+            </span>
+            <span class="linkName">{link.name}</span>
+            <span class="linkLabel">{link.label}</span>
+            {link.href
+              ? <span class="arrow" aria-hidden="true">&rarr;</span>
+              : <span class="soon">Proximamente</span>}
+          </Tag>
+        </li>
+      );
+    })}
   </ul>
 </section>
 
@@ -182,6 +187,29 @@ const links = [
   .linkCard:hover::before,
   .linkCard:focus-visible::before {
     opacity: 0.12;
+  }
+  /* Tarjeta sin URL todavia: se ve apagada y no reacciona al hover */
+  .linkCard.inactive {
+    opacity: 0.55;
+    border-style: dashed;
+    border-color: var(--color-ink-muted);
+  }
+  .linkCard.inactive:hover {
+    transform: none;
+    border-color: var(--color-ink-muted);
+    box-shadow: none;
+  }
+  .linkCard.inactive:hover::before {
+    opacity: 0;
+  }
+  .linkCard.inactive:hover .badge {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+  .soon {
+    margin-top: 0.75em;
+    font-size: 12px;
+    color: var(--color-ink-muted);
   }
   .badge {
     display: flex;

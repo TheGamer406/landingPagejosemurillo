@@ -15,7 +15,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     <BackgroundFx />
     <Header />
     <!--contactPage-->
-    <Contact />
+    <main>
+      <Contact />
+    </main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+  /* El main global limita a 720px; aqui el contenido maneja su propio ancho */
+  main {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+</style>
