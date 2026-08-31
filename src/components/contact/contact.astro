@@ -1,0 +1,263 @@
+---
+const EMAIL = 'contacto@jmurilloch.dev';
+
+// Paths de marca. Fiverr y Workana usan lettermark porque no se incluyen sus SVG oficiales.
+const ICONS = {
+  github:
+    'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z',
+  linkedin:
+    'M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z',
+};
+
+// Un href null se pinta como tarjeta inactiva ("Proximamente") en vez de enlace roto.
+const links = [
+  {
+    name: 'LinkedIn',
+    label: 'Perfil profesional y experiencia',
+    href: 'https://www.linkedin.com/in/josemurilloch',
+    icon: 'linkedin',
+    viewBox: '0 0 448 512',
+    accent: '#0a66c2',
+  },
+  {
+    name: 'GitHub',
+    label: 'Codigo, repos y contribuciones',
+    href: 'https://github.com/TheGamer406',
+    icon: 'github',
+    viewBox: '0 0 16 16',
+    accent: 'var(--color-ink)',
+  },
+  {
+    name: 'Fiverr',
+    label: 'Contratame como freelance',
+    href: 'https://es.fiverr.com/josemurillochev',
+    letter: 'fi',
+    accent: '#1dbf73',
+  },
+  {
+    name: 'Workana',
+    label: 'Proyectos freelance en LATAM',
+    href: 'https://www.workana.com/freelancer/394f0425e9e241b6c6902fe71374df89',
+    letter: 'W',
+    accent: 'var(--color-highlight)',
+  },
+];
+---
+
+<!--hero de contacto-->
+<div class="contactHero">
+  <div class="heroContent">
+    <h1>Contacto</h1>
+    <div class="line"></div>
+    <p class="comment">Hablemos de tu proyecto</p>
+
+    <!--via principal de contacto-->
+    <a class="mailto" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+  </div>
+</div>
+
+<!--perfiles y plataformas-->
+<section class="contactZone">
+  <ul class="linkGrid">
+    {links.map((link) => {
+      const Tag = link.href ? 'a' : 'div';
+      return (
+        <li>
+          <Tag
+            class:list={['linkCard', { inactive: !link.href }]}
+            href={link.href}
+            target={link.href ? '_blank' : undefined}
+            rel={link.href ? 'noopener noreferrer' : undefined}
+            style={`--accent: ${link.accent}`}
+          >
+            <span class="badge">
+              {link.icon ? (
+                <svg viewBox={link.viewBox} aria-hidden="true" width="24" height="24">
+                  <path fill="currentColor" d={ICONS[link.icon as keyof typeof ICONS]}></path>
+                </svg>
+              ) : (
+                <span class="letter" aria-hidden="true">{link.letter}</span>
+              )}
+            </span>
+            <span class="linkName">{link.name}</span>
+            <span class="linkLabel">{link.label}</span>
+            {link.href
+              ? <span class="arrow" aria-hidden="true">&rarr;</span>
+              : <span class="soon">Proximamente</span>}
+          </Tag>
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
+<style>
+  .contactHero {
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1em;
+  }
+  .heroContent {
+    position: relative;
+    z-index: 1;
+  }
+  .contactHero h1 {
+    color: var(--color-highlight);
+    font-size: 55px;
+  }
+  .line {
+    height: 3px;
+    width: 120px;
+    background-color: var(--color-highlight);
+    border-radius: 2px;
+    margin: 0.5em auto;
+  }
+  .comment {
+    color: var(--color-highlight);
+    font-size: 16px;
+    margin: 0;
+  }
+  .mailto {
+    display: inline-block;
+    margin-top: 1.5em;
+    padding: 0.5em 1.5em;
+    font-size: 24px;
+    color: var(--color-ink);
+    text-decoration: none;
+    border: 1px solid var(--color-highlight);
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .mailto:hover,
+  .mailto:focus-visible {
+    background-color: var(--color-highlight);
+    color: var(--color-bg-page);
+  }
+  .contactZone {
+    width: 1000px;
+    max-width: calc(100% - 2em);
+    margin: 2em auto 4em auto;
+    padding: 1em;
+  }
+  .linkGrid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5em;
+  }
+  /* La tarjeta usa --accent (inline por tarjeta) para teñir badge, borde y flecha */
+  .linkCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-ink-muted);
+    background: var(--color-bg-elevated);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 1.5em;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  /* Velo de color que aparece al pasar el cursor */
+  .linkCard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 0% 0%, var(--accent) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+  .linkCard:hover,
+  .linkCard:focus-visible {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-elevated);
+  }
+  .linkCard:hover::before,
+  .linkCard:focus-visible::before {
+    opacity: 0.12;
+  }
+  /* Tarjeta sin URL todavia: se ve apagada y no reacciona al hover */
+  .linkCard.inactive {
+    opacity: 0.55;
+    border-style: dashed;
+    border-color: var(--color-ink-muted);
+  }
+  .linkCard.inactive:hover {
+    transform: none;
+    border-color: var(--color-ink-muted);
+    box-shadow: none;
+  }
+  .linkCard.inactive:hover::before {
+    opacity: 0;
+  }
+  .linkCard.inactive:hover .badge {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+  .soon {
+    margin-top: 0.75em;
+    font-size: 12px;
+    color: var(--color-ink-muted);
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  .linkCard:hover .badge,
+  .linkCard:focus-visible .badge {
+    background: var(--accent);
+    color: var(--color-bg-page);
+  }
+  .letter {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .linkName {
+    color: var(--color-ink);
+    font-size: 22px;
+  }
+  .linkLabel {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  /* La flecha se desplaza al hacer hover para reforzar que es un enlace externo */
+  .arrow {
+    margin-top: 0.75em;
+    color: var(--accent);
+    transition: transform 0.25s ease;
+  }
+  .linkCard:hover .arrow,
+  .linkCard:focus-visible .arrow {
+    transform: translateX(6px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .linkCard,
+    .linkCard .arrow {
+      transition: none;
+    }
+    .linkCard:hover,
+    .linkCard:focus-visible {
+      transform: none;
+    }
+  }
+</style>
