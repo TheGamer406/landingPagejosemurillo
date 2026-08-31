@@ -10,7 +10,7 @@ export default defineConfig({
 	integrations: [mdx(), sitemap()],
 	vite: {
 		server: {
-			allowedHosts: ['jmurilloch.dev'],
+			allowedHosts: ['jmurilloch.dev', 'localhost', '127.0.0.1', '0.0.0.0'],
 			// El bind mount de Docker no propaga eventos inotify de forma fiable:
 			// sin polling el dev server sirve modulos viejos tras editar un archivo.
 			// Solo afecta a `astro dev`, no al build de produccion.
