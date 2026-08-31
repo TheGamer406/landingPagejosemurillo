@@ -11,24 +11,40 @@ const projects = [
 ];
 ---
 
-<!--hero con cubos animados de fondo-->
+<!--capa fija: los cubos acompañan toda la pagina, no solo el hero-->
+<div class="cubesFx" aria-hidden="true">
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+</div>
+
 <div class="projectsHero">
-  <div class="cube"></div>
-  <div class="cube"></div>
-  <div class="cube"></div>
-  <div class="cube"></div>
   <div class="heroContent">
+    <span class="devBadge">Vista previa</span>
     <h1>Proyectos</h1>
-    <div class="line" />
+    <div class="line"></div>
     <p class="comment">Trabajo en curso &middot; se irán agregando proyectos aquí</p>
     <p class="scrollCue">Desliza para ver <span>&darr;</span></p>
   </div>
-  <!--degradado que enlaza el hero con la grilla-->
-  <div class="heroFade"></div>
 </div>
 
 <!--listado de proyectos-->
 <section class="projectsZone">
+
+  <!--aviso explicito de que la pagina aun no es definitiva-->
+  <div class="devNotice" role="status">
+    <span class="devNoticeIcon" aria-hidden="true">&#9888;</span>
+    <div>
+      <strong>Esta pagina esta en desarrollo</strong>
+      <p>
+        Lo que ves es una vista previa. Los proyectos reales, sus capturas y sus
+        enlaces llegaran en la siguiente version del portafolio.
+      </p>
+    </div>
+  </div>
 
   <div class="projectsGrid">
     {projects.map((project) => (
@@ -58,7 +74,7 @@ const projects = [
     cube.style.setProperty('--cube-left', `${Math.random() * 90}vw`);
   }
 
-  const cubes = document.querySelectorAll<HTMLElement>('.projectsHero .cube');
+  const cubes = document.querySelectorAll<HTMLElement>('.cubesFx .cube');
   cubes.forEach((cube) => {
     randomizeCube(cube);
     // Se reubica al cerrar cada vuelta, no en cada frame
@@ -67,9 +83,16 @@ const projects = [
 </script>
 
 <style>
+  /* Capa fija detras del contenido: la animacion sigue visible al hacer scroll */
+  .cubesFx {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
   .projectsHero {
     position: relative;
-    overflow: hidden;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -77,20 +100,45 @@ const projects = [
     justify-content: center;
     text-align: center;
     padding: 1em;
-    background-color: var(--color-bg-page);
   }
   .heroContent {
     position: relative;
     z-index: 1;
   }
-  .heroFade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to bottom, transparent, var(--color-bg-page));
-    pointer-events: none;
+  /* Etiqueta que deja claro que el contenido no es definitivo */
+  .devBadge {
+    display: inline-block;
+    margin-bottom: 1em;
+    padding: 0.25em 1em;
+    border: 1px solid var(--color-highlight);
+    border-radius: 999px;
+    color: var(--color-highlight);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .devNotice {
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+    margin-bottom: 2.5em;
+    padding: 1.25em 1.5em;
+    border: 1px dashed var(--color-highlight);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-highlight) 8%, transparent);
+  }
+  .devNoticeIcon {
+    color: var(--color-highlight);
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .devNotice strong {
+    color: var(--color-ink);
+  }
+  .devNotice p {
+    margin: 0.25em 0 0 0;
+    font-size: 15px;
+    line-height: 1.5;
   }
   .projectsHero h1 {
     color: var(--color-highlight);
@@ -118,6 +166,12 @@ const projects = [
   }
   .cube:nth-child(4) {
     animation-delay: 3s;
+  }
+  .cube:nth-child(5) {
+    animation-delay: 4s;
+  }
+  .cube:nth-child(6) {
+    animation-delay: 5s;
   }
   @keyframes cube {
     from {
